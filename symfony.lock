@@ -96,6 +96,12 @@
     "php": {
         "version": "7.2"
     },
+    "phpstan/phpstan": {
+        "version": "0.12.14"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.4"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -107,6 +113,18 @@
     },
     "sensio/framework-extra-bundle": {
         "version": "v3.0.27"
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        },
+        "files": [
+            "./phpcs.xml.dist"
+        ]
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"

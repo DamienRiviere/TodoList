@@ -99,7 +99,6 @@ class Task
     public function setIsDone(bool $isDone): self
     {
         $this->isDone = $isDone;
-
         return $this;
     }
 }

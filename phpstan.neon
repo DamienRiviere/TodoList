@@ -1,0 +1,12 @@
+includes:
+   - vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+    symfony:
+       container_xml_path: %rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml
+    level: 6
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - '#Access to an undefined property Symfony\\Component\\Validator\\Constraint::\$message.#'
+    excludes_analyse:
+        - src/Migrations/*.php

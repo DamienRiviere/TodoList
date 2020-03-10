@@ -12,15 +12,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-	/** @var UserPasswordEncoderInterface */
-	protected $encoder;
+    /** @var UserPasswordEncoderInterface */
+    protected $encoder;
 
-	public function __construct(UserPasswordEncoderInterface $encoder)
-	{
-		$this->encoder = $encoder;
-	}
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
 
-	/**
+    /**
      * @Route("/users", name="user_list")
      */
     public function listAction(UserRepository $userRepository)
