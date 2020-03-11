@@ -3,7 +3,9 @@
 {% block header_img %}<img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list">{% endblock %}
 
 {% block body %}
-    <a href="{{ path('task_create') }}" class="btn btn-info pull-right">Créer une tâche</a>
+    {% if tasks | length >= 1 %}
+        <a href="{{ path('task_create') }}" class="btn btn-info pull-right">Créer une tâche</a>
+    {% endif %}
     <div class="row">
         {% for task in tasks %}
         <div class="col-sm-4 col-lg-4 col-md-4">
@@ -14,23 +16,28 @@
                     </h4>
                     <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
                     <p>{{ task.content }}</p>
+                    <p>Auteur : {{ task.user.username }}</p>
                 </div>
                 <div>
+                    {% if app.user == task.user or app.user.roles[0] == "ROLE_ADMIN" %}
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
                         <button class="btn btn-success btn-sm pull-right">
                             {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
                         </button>
                     </form>
+                    <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-warning btn-sm pull-right">Modifier</a>
                     <form action="{{ path('task_delete', {'id' : task.id }) }}">
                         <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
                     </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        {% else %}
-            <div class="alert alert-warning" role="alert">
+        {% endfor %}
+        {% if tasks | length == 0 %}
+            <div class="alert alert-warning mb-0" role="alert">
                 Il n'y a pas encore de tâche enregistrée. <a href="{{ path('task_create') }}" class="btn btn-warning pull-right">Créer une tâche</a>
             </div>
-        {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
