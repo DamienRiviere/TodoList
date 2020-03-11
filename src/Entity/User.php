@@ -39,19 +39,27 @@ class User implements UserInterface
      */
     private $email;
 
-    public function getId()
+    /**
+     * @ORM\Column(type="array")
+     * @Assert\NotBlank(message="Vous devez choisir un rôle.")
+     */
+    private $roles;
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
     }
 
     public function getSalt()
@@ -59,32 +67,43 @@ class User implements UserInterface
         return null;
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-    }
 
-    public function getRoles()
-    {
-        return array('ROLE_USER');
+        return $this;
     }
 
     public function eraseCredentials()
     {
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles[0] = $roles[0];
+
+        return $this;
     }
 }
