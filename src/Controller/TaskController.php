@@ -19,6 +19,10 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+/**
+ * Class TaskController
+ * @package App\Controller
+ */
 class TaskController
 {
 
@@ -158,7 +162,7 @@ class TaskController
     {
         $this->em->remove($task);
         $this->em->flush();
-        $this->flash->add('danger', 'La tâche a bien été supprimée.');
+        $this->flash->add('error', 'La tâche a bien été supprimée.');
 
         return new RedirectResponse($this->urlGenerator->generate('task_list'));
     }

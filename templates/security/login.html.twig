@@ -5,13 +5,13 @@
         <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login_check') }}" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    {{ form_start(form) }}
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
+    {{ form_row(form.username) }}
 
-        <button class="btn btn-success" type="submit">Se connecter</button>
-    </form>
+    {{ form_row(form.password) }}
+
+    <button type="submit" class="btn btn-primary">Connexion</button>
+
+    {{ form_end(form) }}
 {% endblock %}
