@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -160,6 +161,10 @@ class TaskController
      */
     public function deleteTask(Task $task)
     {
+        if (!$this->security->isGranted('DELETE', $task)) {
+            throw new AccessDeniedException();
+        }
+
         $this->em->remove($task);
         $this->em->flush();
         $this->flash->add('error', 'La tâche a bien été supprimée.');
