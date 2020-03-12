@@ -2,45 +2,47 @@
 
 namespace App\Form;
 
-use App\Entity\Task;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TaskType extends AbstractType
+class LoginType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'title',
+                'username',
                 TextType::class,
                 [
-                    'label' => 'Titre de la tâche',
+                    'label' => 'Nom d\'utilisateur',
                     'attr' => [
-                        'placeholder' => 'Entrez le titre de votre tâche'
+                        'placeholder' => 'Entrez votre nom d\'utilisateur ...'
                     ]
                 ]
             )
             ->add(
-                'content',
-                TextareaType::class,
+                'password',
+                PasswordType::class,
                 [
-                    'label' => 'Contenu de la tâche',
+                    'label' => 'Mot de passe',
                     'attr' => [
-                        'placeholder' => 'Entrez le contenu de votre tâche'
+                        'placeholder' => 'Entrez votre mot de passe ...'
                     ]
                 ]
-            )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Task::class
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => User::class
+            ]
+        );
     }
 }

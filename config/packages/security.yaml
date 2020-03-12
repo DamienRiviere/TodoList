@@ -14,16 +14,18 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            anonymous: true
             pattern: ^/
-            form_login:
-                login_path: login
-                check_path: login_check
-                always_use_default_target_path:  true
-                default_target_path:  /
-            logout: ~
+            guard:
+                authenticators:
+                    - App\Authentication\LoginAuthenticator
+            logout:
+                path: logout
+                target: homepage
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ROLE_ADMIN, ROLE_USER] }
