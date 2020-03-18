@@ -6,7 +6,6 @@ parameters:
     level: 6
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
-    ignoreErrors:
-        - '#Access to an undefined property Symfony\\Component\\Validator\\Constraint::\$message.#'
     excludes_analyse:
         - src/Migrations/*.php
+        - src/DataFixtures

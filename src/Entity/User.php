@@ -20,17 +20,20 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
      * @Assert\NotBlank(message="Vous devez saisir un nom d'utilisateur.")
+     * @var string
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @var string
      */
     private $password;
 
@@ -38,17 +41,20 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=60, unique=true)
      * @Assert\NotBlank(message="Vous devez saisir une adresse email.")
      * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
+     * @var string
      */
     private $email;
 
     /**
      * @ORM\Column(type="array")
      * @Assert\NotBlank(message="Vous devez choisir un rôle.")
+     * @var array
      */
     private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user", orphanRemoval=true)
+     * @var ArrayCollection
      */
     private $tasks;
 
@@ -103,7 +109,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 
