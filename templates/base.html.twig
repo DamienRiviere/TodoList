@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>To Do List app</title>
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Custom CSS -->
+        <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ac523669e5.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">To Do List app</a>
+                    <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms" />
+                </div>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a href="{{ path('homepage') }}" class="nav-link">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('task_list') }}" class="nav-link">Tâches</a>
+                            </li>
+                        {% endif %}
+                        {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
+                            <li class="nav-item">
+                                <a href="{{ path('user_list') }}" class="nav-link">Utilisateurs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('user_create') }}" class="nav-link">Créer un utilisateur</a>
+                            </li>
+                        {% endif %}
+                        {% if not app.user and 'login' != app.request.attributes.get('_route') %}
+                            <li class="nav-item">
+                                <a href="{{ path('login') }}" class="nav-link">Se connecter</a>
+                            </li>
+                        {% endif %}
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for flash_message in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+
+                    {% for flash_message in app.session.flashBag.get('error') %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+
+                    {% block header_title %}{% endblock %}
+                    {% block header_img %}<img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="todo list">{% endblock %}
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-12">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+
+        <div class="container">
+
+            <hr>
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="pull-right">Copyright &copy; OpenClassrooms</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>

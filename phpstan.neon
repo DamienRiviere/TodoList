@@ -1,0 +1,11 @@
+includes:
+   - vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+    symfony:
+       container_xml_path: %rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml
+    level: 6
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    excludes_analyse:
+        - src/Migrations/*.php
+        - src/DataFixtures
