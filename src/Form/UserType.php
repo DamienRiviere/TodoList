@@ -56,8 +56,8 @@ class UserType extends AbstractType
                 ChoiceType::class,
                 [
                 'choices' => [
-                    'Administrateur' => self::ADMIN,
-                    'Utilisateur' => self::USER
+                    'Utilisateur' => self::USER,
+                    'Administrateur' => self::ADMIN
                 ],
                     'expanded' => false,
                     'multiple' => false,
@@ -71,7 +71,13 @@ class UserType extends AbstractType
         $builder->get('roles')
             ->addModelTransformer(new CallbackTransformer(
                 function ($rolesArray) {
-                    return$rolesArray[0];
+                    if (is_array($rolesArray)) {
+                        return $rolesArray[0];
+                    }
+
+                    if (is_null($rolesArray)) {
+                        return '';
+                    }
                 },
                 function ($rolesString) {
                     return [$rolesString];
