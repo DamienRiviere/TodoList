@@ -39,8 +39,7 @@
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "^4.0",
-        "doctrine/doctrine-fixtures-bundle": "^3.3"
+        "symfony/yaml": "^4.0"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.3",
@@ -49,7 +48,8 @@
         "symfony/css-selector": "4.4.*",
         "symfony/maker-bundle": "^1.14",
         "symfony/phpunit-bridge": "^5.0",
-        "symfony/web-server-bundle": "4.4.*"
+        "symfony/web-server-bundle": "4.4.*",
+        "doctrine/doctrine-fixtures-bundle": "^3.3"
     },
     "config": {
         "preferred-install": {
@@ -67,10 +67,6 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ],
-        "compile": [
-            "php bin/console doctrine:migrations:migrate",
-            "php bin/console doctrine:fixtures:load --no-interaction --env=PROD"
         ]
     },
     "conflict": {
