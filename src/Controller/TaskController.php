@@ -145,7 +145,7 @@ class TaskController
      * @param Task $task
      * @return RedirectResponse
      */
-    public function toggleTask(Task $task)
+    public function toggle(Task $task)
     {
         $task->toggle(!$task->isDone());
         $this->em->flush();
@@ -159,7 +159,7 @@ class TaskController
      * @param Task $task
      * @return RedirectResponse
      */
-    public function deleteTask(Task $task)
+    public function delete(Task $task)
     {
         if (!$this->security->isGranted('DELETE', $task)) {
             throw new AccessDeniedException();

@@ -99,7 +99,7 @@ class TaskControllerTest extends AbstractControllerTest
         $this->assertEquals('admin@gmail.com', $task->getUser()->getEmail());
     }
 
-    public function testToggleTask()
+    public function testToggle()
     {
         $this->client->request('GET', '/tasks/1/toggle');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
@@ -120,7 +120,7 @@ class TaskControllerTest extends AbstractControllerTest
         $this->assertEquals('1', $task->getIsDone());
     }
 
-    public function testDeleteTask()
+    public function testDelete()
     {
         $this->client->request('DELETE', '/tasks/1/delete');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
@@ -140,7 +140,7 @@ class TaskControllerTest extends AbstractControllerTest
         $this->assertEmpty($task);
     }
 
-    public function testAccessDeleteTask()
+    public function testAccessDelete()
     {
         $this->loginWithUser();
 
