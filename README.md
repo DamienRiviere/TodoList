@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de26aa436f9945ce82fdbd00c1ddc1f3)](https://www.codacy.com/manual/DamienRiviere/TodoList?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DamienRiviere/TodoList&amp;utm_campaign=Badge_Grade)
+
 # Améliorez une application existante de ToDo & Co
 
 ## Installation du projet
