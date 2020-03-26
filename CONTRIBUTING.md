@@ -33,7 +33,7 @@ Une fois la branche créée, placez-vous dedans et commencer à développer votr
 
 Durant le développement vous veillerez à respecter les bonnes pratiques de codage des PSR-1 et 12.
 
-Le code que vous produisez devra être obligatoirement testé avec PHPUnit et Behat.
+Le code que vous produisez devra être obligatoirement testé avec PHPUnit et/ou Behat.
 
 Une fois vos améliorations apportées vous pouvez faire une pull request sur le repository principal du projet. 
 
@@ -65,13 +65,17 @@ En fonction du but d’une méthode elle devra respecter le nommage suivant :
 - register()
 - count()
 - keys()
+- create()
+- edit()
+- delete()
+
 
 ### Conventions de nommage : 
 
-- nommez vos variables, fonction et arguments en camelCase
+- nommez vos variables, fonctions et arguments en camelCase
 - utilisez des namespaces pour toutes vos classes et nommez les en UpperCamelCase
 - mettez le suffixe Interface pour les interfaces
-- mettez le suffixe Trait pour les trait
+- mettez le suffixe Trait pour les traits
 - mettez le suffixe Exception pour les exceptions
 
 ### Documentation :
@@ -79,7 +83,7 @@ En fonction du but d’une méthode elle devra respecter le nommage suivant :
 - la PHPDoc doit être présente pour toutes les classes et fonctions
 - oublier le tag @return si la méthode ne retourne rien
 - ne pas mettre la PHPDoc sur une seule ligne
-- quand vous modifiez faites de grosses modifications ou ajoutez une nouvelle classe, utiliser le tag @author avec vos informations de contact
+- quand vous faites de grosses modifications ou ajoutez une nouvelle classe, utiliser le tag @author avec vos informations de contact
 
 
 
