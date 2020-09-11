@@ -33,9 +33,9 @@ jobs:
                 paths:
                     - node_modules
 
-            - run: ./bin/console d:d:c --env=test
-            - run: ./bin/console d:s:c --env=test
-            - run: ./bin/console d:f:l --env=test
-            - run: ./bin/phpunit -v
+            - run: php bin/console doctrine:create:database --env=test
+            - run: php bin/console doctrine:schema:create --env=test
+            - run: php bin/console doctrine:fixtures:load --env=test
+            - run: php bin/phpunit -v
 
 
