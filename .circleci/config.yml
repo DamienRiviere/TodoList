@@ -8,8 +8,7 @@ jobs:
             - checkout
 
             - run: sudo apt update && sudo apt install -y libsqlite3-dev zlib1g-dev
-            - run: sudo docker-php-ext-install zip pdo_sqlite
-            - run: sudo docker-php-ext-enable pdo_sqlite
+            - run: sudo docker-php-ext-install zip
             - run: sudo composer self-update
 
             - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
