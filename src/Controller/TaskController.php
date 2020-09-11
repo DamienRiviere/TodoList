@@ -31,7 +31,7 @@ class TaskController
     protected $formFactory;
 
     /** @var EntityManagerInterface */
-    protected $em;
+    protected $entityManager;
 
     /** @var FlashBagInterface */
     protected $flash;
@@ -48,7 +48,7 @@ class TaskController
     /**
      * UserController constructor.
      * @param FormFactoryInterface $formFactory
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      * @param FlashBagInterface $flash
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
@@ -56,14 +56,14 @@ class TaskController
      */
     public function __construct(
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $em,
+        EntityManagerInterface $entityManager,
         FlashBagInterface $flash,
         Environment $twig,
         UrlGeneratorInterface $urlGenerator,
         Security $security
     ) {
         $this->formFactory = $formFactory;
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->flash = $flash;
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
@@ -78,7 +78,7 @@ class TaskController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function list(TaskRepository $taskRepository)
+    public function list(TaskRepository $taskRepository): Response
     {
         return new Response($this->twig->render('task/list.html.twig', ['tasks' => $taskRepository->findAll()]));
     }
@@ -98,8 +98,8 @@ class TaskController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $task->setUser($this->security->getUser());
-            $this->em->persist($task);
-            $this->em->flush();
+            $this->entityManager->persist($task);
+            $this->entityManager->flush();
             $this->flash->add('success', 'La tâche a été bien été ajoutée.');
 
             return new RedirectResponse($this->urlGenerator->generate('task_list'));
@@ -123,7 +123,7 @@ class TaskController
                                   ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->flush();
+            $this->entityManager->flush();
             $this->flash->add('success', 'La tâche a bien été modifiée.');
 
             return new RedirectResponse($this->urlGenerator->generate('task_list'));
@@ -145,10 +145,10 @@ class TaskController
      * @param Task $task
      * @return RedirectResponse
      */
-    public function toggle(Task $task)
+    public function toggle(Task $task): RedirectResponse
     {
         $task->toggle(!$task->isDone());
-        $this->em->flush();
+        $this->entityManager->flush();
         $this->flash->add('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
 
         return new RedirectResponse($this->urlGenerator->generate('task_list'));
@@ -159,14 +159,14 @@ class TaskController
      * @param Task $task
      * @return RedirectResponse
      */
-    public function delete(Task $task)
+    public function delete(Task $task): RedirectResponse
     {
         if (!$this->security->isGranted('DELETE', $task)) {
             throw new AccessDeniedException();
         }
 
-        $this->em->remove($task);
-        $this->em->flush();
+        $this->entityManager->remove($task);
+        $this->entityManager->flush();
         $this->flash->add('error', 'La tâche a bien été supprimée.');
 
         return new RedirectResponse($this->urlGenerator->generate('task_list'));

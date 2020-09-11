@@ -22,16 +22,16 @@ class TaskRepositoryTest extends KernelTestCase
         ;
     }
 
-    public function testSearchByTitle()
+    public function testSearchByTitle(): void
     {
         $task = $this->em
             ->getRepository(Task::class)
             ->findOneBy(['title' => 'Titre de la tâche'])
         ;
 
-        $this->assertSame('Titre de la tâche', $task->getTitle());
-        $this->assertSame('Description de la tâche', $task->getContent());
-        $this->assertSame('admin', $task->getUser()->getUsername());
+        self::assertSame('Titre de la tâche', $task->getTitle());
+        self::assertSame('Description de la tâche', $task->getContent());
+        self::assertSame('admin', $task->getUser()->getUsername());
     }
 
     public function tearDown(): void

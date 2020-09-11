@@ -9,6 +9,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class LoginType
+ * @package App\Form
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 class LoginType extends AbstractType
 {
 

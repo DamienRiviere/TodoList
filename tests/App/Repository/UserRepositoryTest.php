@@ -23,16 +23,16 @@ class UserRepositoryTest extends KernelTestCase
         ;
     }
 
-    public function testSearchByUsername()
+    public function testSearchByUsername(): void
     {
         $user = $this->em
             ->getRepository(User::class)
             ->findOneBy(['username' => 'admin'])
         ;
 
-        $this->assertSame('admin', $user->getUsername());
-        $this->assertSame('admin@gmail.com', $user->getEmail());
-        $this->assertSame('ROLE_ADMIN', $user->getRoles()[0]);
+        self::assertSame('admin', $user->getUsername());
+        self::assertSame('admin@gmail.com', $user->getEmail());
+        self::assertSame('ROLE_ADMIN', $user->getRoles()[0]);
     }
 
     public function tearDown(): void

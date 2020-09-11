@@ -14,7 +14,7 @@ abstract class AbstractControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function loginWithAdmin()
+    public function loginWithAdmin(): void
     {
         $crawler = $this->client->request('GET', '/login');
 
@@ -27,7 +27,7 @@ abstract class AbstractControllerTest extends WebTestCase
         $this->client->submit($form);
     }
 
-    public function loginWithUser()
+    public function loginWithUser(): void
     {
         $crawler = $this->client->request('GET', '/login');
 

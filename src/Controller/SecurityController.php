@@ -45,7 +45,7 @@ class SecurityController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function login()
+    public function login(): Response
     {
         $form = $this->formFactory->create(LoginType::class);
 

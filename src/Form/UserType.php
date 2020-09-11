@@ -13,6 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class UserType
+ * @package App\Form
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 class UserType extends AbstractType
 {
 

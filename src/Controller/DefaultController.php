@@ -23,7 +23,7 @@ class DefaultController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function index(Environment $twig)
+    public function index(Environment $twig): Response
     {
         return new Response($twig->render('default/index.html.twig'));
     }

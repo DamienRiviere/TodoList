@@ -33,7 +33,7 @@ class UserController
     protected $encoder;
 
     /** @var EntityManagerInterface */
-    protected $em;
+    protected $entityManager;
 
     /** @var FlashBagInterface */
     protected $flash;
@@ -48,7 +48,7 @@ class UserController
      * UserController constructor.
      * @param FormFactoryInterface $formFactory
      * @param UserPasswordEncoderInterface $encoder
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      * @param FlashBagInterface $flash
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
@@ -56,14 +56,14 @@ class UserController
     public function __construct(
         FormFactoryInterface $formFactory,
         UserPasswordEncoderInterface $encoder,
-        EntityManagerInterface $em,
+        EntityManagerInterface $entityManager,
         FlashBagInterface $flash,
         Environment $twig,
         UrlGeneratorInterface $urlGenerator
     ) {
         $this->formFactory = $formFactory;
         $this->encoder = $encoder;
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->flash = $flash;
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
@@ -77,7 +77,7 @@ class UserController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function list(UserRepository $userRepository)
+    public function list(UserRepository $userRepository): Response
     {
         return new Response($this->twig->render('user/list.html.twig', ['users' => $userRepository->findAll()]));
     }
@@ -97,8 +97,8 @@ class UserController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-            $this->em->persist($user);
-            $this->em->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
             $this->flash->add('success', "L'utilisateur a bien été ajouté.");
             
             return new RedirectResponse($this->urlGenerator->generate('user_list'));
@@ -123,7 +123,7 @@ class UserController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-            $this->em->flush();
+            $this->entityManager->flush();
             $this->flash->add('success', "L'utilisateur a bien été modifié");
 
             return new RedirectResponse($this->urlGenerator->generate('user_list'));

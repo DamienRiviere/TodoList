@@ -2,40 +2,36 @@
 
 namespace App\Tests\App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-
 class SecurityControllerTest extends AbstractControllerTest
 {
 
-    public function testLoginWithValidData()
+    public function testLoginWithValidData(): void
     {
         $crawler = $this->client->request('GET', '/login');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertCount(3, $crawler->filter('input'));
-        $this->assertContains('Connexion', $crawler->filter('button.btn.btn-primary')->text());
+        self::assertEquals(200, $this->client->getResponse()->getStatusCode());
+        self::assertCount(3, $crawler->filter('input'));
+        self::assertContains('Connexion', $crawler->filter('button.btn.btn-primary')->text());
 
         $this->loginWithAdmin();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        self::assertEquals(302, $this->client->getResponse()->getStatusCode());
         $crawler = $this->client->followRedirect();
 
-        $this->assertContains('Créer une nouvelle tâche', $crawler->filter('a.btn.btn-success.btn-sm.mb-2')->text());
-        $this->assertContains(
+        self::assertContains('Créer une nouvelle tâche', $crawler->filter('a.btn.btn-success.btn-sm.mb-2')->text());
+        self::assertContains(
             'Consulter la liste des tâches à faire',
             $crawler->filter('a.btn.btn-info.btn-sm.mb-2')->text()
         );
-        $this->assertContains(
+        self::assertContains(
             "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !",
             $crawler->filter('h1')->text()
         );
     }
 
-    public function testLoginWithInvalidData()
+    public function testLoginWithInvalidData(): void
     {
         $crawler = $this->client->request('GET', '/login');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        self::assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $buttonCrawlerMode = $crawler->filter('form');
         $form = $buttonCrawlerMode->form([
@@ -45,18 +41,18 @@ class SecurityControllerTest extends AbstractControllerTest
 
         $this->client->submit($form);
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        self::assertEquals(302, $this->client->getResponse()->getStatusCode());
         $crawler = $this->client->followRedirect();
-        $this->assertEquals(
+        self::assertEquals(
             'Nom d\'utilisateur ou mot de passe invalide !',
             $crawler->filter('div.alert.alert-danger')->text(null, true)
         );
     }
 
-    public function testLoginWithInvalidPassword()
+    public function testLoginWithInvalidPassword(): void
     {
         $crawler = $this->client->request('GET', '/login');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        self::assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $buttonCrawlerMode = $crawler->filter('form');
         $form = $buttonCrawlerMode->form([
@@ -66,9 +62,9 @@ class SecurityControllerTest extends AbstractControllerTest
 
         $this->client->submit($form);
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        self::assertEquals(302, $this->client->getResponse()->getStatusCode());
         $crawler = $this->client->followRedirect();
-        $this->assertEquals(
+        self::assertEquals(
             'Nom d\'utilisateur ou mot de passe invalide !',
             $crawler->filter('div.alert.alert-danger')->text(null, true)
         );

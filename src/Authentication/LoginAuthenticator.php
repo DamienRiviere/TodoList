@@ -20,6 +20,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 
 /**
  * Class LoginAuthenticator
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  * @package App\Authentication
  */
 class LoginAuthenticator extends AbstractFormLoginAuthenticator
@@ -125,7 +126,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
     /**
      * @param Request $request
      * @param TokenInterface $token
-     * @param string $providerKey
      * @return RedirectResponse|Response|null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -138,7 +138,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
     /**
      * @return string
      */
-    protected function getLoginUrl()
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate('login');
     }
