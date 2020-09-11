@@ -2,12 +2,12 @@ version: 2
 jobs:
     build:
         docker:
-            - image: circleci/php:7.4-node-browsers
+            - image: circleci/php:7.4-apache-node-browsers
 
         steps:
             - checkout
 
-            - run: sudo apt install -y libsqlite3-dev zlib1g-dev php7.4-sqlite3
+            - run: sudo apt update && sudo apt install -y libsqlite3-dev zlib1g-dev
             - run: sudo docker-php-ext-install zip
             - run: sudo composer self-update
 
@@ -33,9 +33,9 @@ jobs:
                 paths:
                     - node_modules
 
-            - run: php bin/console doctrine:database:create --env=test
-            - run: php bin/console doctrine:schema:update --env=test
-            - run: php bin/console doctrine:fixtures:load --env=test
-            - run: php bin/phpunit -v
+            - run: ./bin/console d:d:c --env=test
+            - run: ./bin/console d:s:c --env=test
+            - run: ./bin/console d:f:l --env=test
+            - run: ./bin/phpunit -v
 
 
