@@ -7,7 +7,7 @@ jobs:
         steps:
             - checkout
 
-            - run: sudo apt install -y libsqlite3-dev zlib1g-dev
+            - run: sudo apt install -y libsqlite3-dev zlib1g-dev php7.4-sqlite3
             - run: sudo docker-php-ext-install zip
             - run: sudo composer self-update
 
@@ -33,9 +33,9 @@ jobs:
                 paths:
                     - node_modules
 
-            - run: ./bin/console doctrine:database:create --env=test
-            - run: ./bin/console doctrine:schema:update --env=test
-            - run: ./bin/console doctrine:fixtures:load --env=test
-            - run: ./bin/console/phpunit -v
+            - run: php bin/console doctrine:database:create --env=test
+            - run: php bin/console doctrine:schema:update --env=test
+            - run: php bin/console doctrine:fixtures:load --env=test
+            - run: php bin/phpunit -v
 
 
