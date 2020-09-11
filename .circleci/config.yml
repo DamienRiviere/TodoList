@@ -33,7 +33,7 @@ jobs:
                 paths:
                     - node_modules
 
-            - run: php bin/console doctrine:create:database --env=test
+            - run: php bin/console doctrine:database:create --env=test
             - run: php bin/console doctrine:schema:create --env=test
             - run: php bin/console doctrine:fixtures:load --env=test
             - run: php bin/phpunit -v
