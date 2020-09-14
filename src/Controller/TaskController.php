@@ -23,6 +23,7 @@ use Twig\Error\SyntaxError;
 /**
  * Class TaskController
  * @package App\Controller
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class TaskController
 {
