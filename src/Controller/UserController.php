@@ -22,6 +22,7 @@ use Twig\Error\SyntaxError;
 /**
  * Class UserController
  * @package App\Controller
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserController
 {
